@@ -42,7 +42,7 @@ public class ItinerarioDAOImplement {
 	}
 	public boolean tieneItinerario(String userName) {
 		try {
-			String sql = "SELECT COUNT(*) AS TOTAL FROM Itinerario WHERE Usuario_nombre = ?";
+			String sql = "SELECT COUNT(*) AS TOTAL FROM Itinerario WHERE id_usuario = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			PreparedStatement statement = conn.prepareStatement(sql);

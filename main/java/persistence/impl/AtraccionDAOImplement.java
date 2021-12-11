@@ -77,7 +77,7 @@ public class AtraccionDAOImplement implements AtraccionesDAO {
 
 		try {
 
-			String sql = "SELECT * FROM ATRACCIONES";
+			String sql = "SELECT * FROM ATRACCIONES as a WHERE a.Habilitado = 1;";
 			Connection conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			PreparedStatement statement = conn.prepareStatement(sql);

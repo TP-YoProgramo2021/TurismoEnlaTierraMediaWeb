@@ -26,7 +26,7 @@ public class PromocionesDAOImplement implements PromocionesDAO {
 		try {
 // System.out.println("HOLA");
 
-			String sql = "SELECT p.nombre, group_concat(Nombre_atraccion) as Atracciones FROM Promociones p LEFT JOIN Promocion_Atraccion ap ON p.Nombre = ap.Nombre_promocion GROUP BY p.Nombre;";
+			String sql = "SELECT p.nombre, group_concat(Nombre_atraccion) as Atracciones FROM Promociones p LEFT JOIN Promocion_Atraccion ap ON p.Nombre = ap.Nombre_promocion WHERE p.Habilitado = 1 GROUP BY p.Nombre;";
 			String sql2 = "SELECT * FROM Porcentual;";
 			String sql3 = "SELECT * FROM Absoluta;";
 			String sql4 = "SELECT * FROM AXB;";

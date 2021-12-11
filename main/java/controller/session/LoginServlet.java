@@ -4,12 +4,13 @@ import java.io.IOException;
 
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Usuario;
 import services.LoginService;
-
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = -6297253484773595677L;
 	private LoginService loginService;
@@ -29,7 +30,7 @@ public class LoginServlet extends HttpServlet implements Servlet {
 		// Verificamos que el usuario y contraseña sean correctas
 		Usuario user = loginService.login(username, password);
 
-		if (user != null) {
+		if (!user.isNull()) {
 			// Seteamos en la sesion el usuario y preparamos el destino
 			req.getSession().setAttribute("user", user);
 			resp.sendRedirect("home.jsp");

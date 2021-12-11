@@ -75,12 +75,41 @@ public class UsuarioDAOImplement implements UsuarioDAO{
 			
 				
 	}
+	@Override
+	public Usuario findById(Integer id) {
+		
+		try {
+			
+			String sql = "SELECT * FROM USUARIOS WHERE id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, id.toString());
+			ResultSet resultados = statement.executeQuery();
+
+			Usuario user = null;
+
+			if (resultados.next()) {
+				user = toUser(resultados);
+			}
+
+			return user;
+			
+		} catch (Exception e) {
+			throw new MiDataException(e);
+		}
+		
+			
+}
+	
+	
+	
+	
 
 	public List<Usuario> findAll() {
 				
 		try {
 					
-			String sql = "SELECT * FROM USUARIOS";
+			String sql = "SELECT * FROM Usuarios as u WHERE u.Habilitado = 1;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -103,13 +132,23 @@ public class UsuarioDAOImplement implements UsuarioDAO{
 		ItinerarioDAOImplement itDAO = DAOFactory.getItinerarioDAO();
 		if (!itDAO.tieneItinerario(resultados.getString("Nombre"))) {
 
-			return new Usuario(TipoDeAtraccion.valueOf(resultados.getString("Atraccion_Preferida")),
-					resultados.getInt("Presupuesto"), Double.parseDouble(resultados.getString("Tiempo")),
-					resultados.getString("Nombre"));
+			return new Usuario(resultados.getInt("id"),
+					resultados.getString("Nombre"),
+					resultados.getString("Password"),
+					resultados.getInt("id")==1,
+					resultados.getInt("Presupuesto"),
+					Double.parseDouble(resultados.getString("Tiempo")),
+					TipoDeAtraccion.valueOf(resultados.getString("Atraccion_Preferida")));
 		}else {
-			return new Usuario(TipoDeAtraccion.valueOf(resultados.getString("Atraccion_Preferida")),
-					resultados.getInt("Presupuesto"), Double.parseDouble(resultados.getString("Tiempo")),
-					resultados.getString("Nombre"),itDAO.buscarPorUsuario(resultados.getString("Nombre")));
+			return new Usuario(resultados.getInt("id"),
+					resultados.getString("Nombre"),
+					resultados.getString("Password"),
+					resultados.getInt("id")==1,
+					resultados.getInt("Presupuesto"),
+					Double.parseDouble(resultados.getString("Tiempo")),
+					TipoDeAtraccion.valueOf(resultados.getString("Atraccion_Preferida")),
+					itDAO.buscarPorUsuario(resultados.getString("Nombre")));
+
 		}
 	}
 

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/Eze/eclipse-workspace/TurismoTierraMediaWeb/tierraMedia.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2496"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,3:mainAXB"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE &quot;TipoAtraccion&quot; (
+	&quot;Tipo&quot;	TEXT NOT NULL,
+	PRIMARY KEY(&quot;Tipo&quot;)
+);
+
+CREATE TABLE &quot;Atracciones&quot; (
+	&quot;Nombre&quot;		TEXT NOT NULL,
+	&quot;Costo&quot;			INTEGER NOT NULL,
+	&quot;Tiempo&quot;		REAL NOT NULL,
+	&quot;Cupo&quot;			INTEGER NOT NULL,
+	&quot;Tipo&quot;			TEXT NOT NULL,
+	&quot;Habilitado&quot;	INTEGER NOT NULL DEFAULT 1,
+	PRIMARY KEY(&quot;Nombre&quot;),
+	FOREIGN KEY(&quot;Tipo&quot;) REFERENCES TipoAtraccion(&quot;Tipo&quot;)
+);
+
+CREATE TABLE &quot;Promociones&quot; (
+	&quot;Nombre&quot;			TEXT NOT NULL,
+	&quot;Tipo_atraccion&quot;	TEXT NOT NULL,
+	&quot;Habilitado&quot;		INTEGER NOT NULL DEFAULT 1,
+	
+	PRIMARY KEY(&quot;Nombre&quot;),
+	FOREIGN KEY(&quot;Tipo_atraccion&quot;) REFERENCES TipoAtraccion(&quot;Tipo&quot;)
+	);
+	
+	CREATE TABLE &quot;Porcentual&quot; (
+	&quot;Nombre&quot;		TEXT NOT NULL,
+	&quot;Descuento&quot;		REAL NOT NULL,
+	
+	FOREIGN KEY(&quot;Nombre&quot;) REFERENCES Promociones(&quot;Nombre&quot;)
+	);
+	
+	CREATE TABLE &quot;AXB&quot; (
+	&quot;Nombre&quot;			TEXT NOT NULL,
+	&quot;Atraccion_gratis&quot;	TEXT NOT NULL,
+	
+
+	FOREIGN KEY(&quot;Nombre&quot;) REFERENCES Promociones(&quot;Nombre&quot;)
+	FOREIGN KEY(&quot;Atraccion_gratis&quot;) REFERENCES Atracciones(&quot;Nombre&quot;)
+	
+	);
+	
+	CREATE TABLE &quot;Absoluta&quot; (
+	&quot;Nombre&quot;		TEXT NOT NULL,
+	&quot;Precio&quot;		INTEGER NOT NULL,
+	
+
+	FOREIGN KEY(&quot;Nombre&quot;) REFERENCES Promociones(&quot;Nombre&quot;)
+	
+	);
+	
+	CREATE TABLE &quot;Promocion_Atraccion&quot; (
+	&quot;Nombre_promocion&quot;	TEXT NOT NULL,
+	&quot;Nombre_atraccion&quot;	TEXT NOT NULL,
+	
+	PRIMARY KEY (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;),
+	FOREIGN KEY(&quot;Nombre_promocion&quot;) REFERENCES Promociones(&quot;Nombre&quot;)
+	FOREIGN KEY(&quot;Nombre_atraccion&quot;) REFERENCES Atracciones(&quot;Nombre&quot;)
+	
+	);
+	
+	CREATE TABLE &quot;Usuarios&quot; (
+	&quot;id&quot;		   			INTEGER NOT NULL,
+	&quot;Nombre&quot;				TEXT NOT NULL,
+	&quot;Password&quot;				TEXT NOT NULL,
+	&quot;Atraccion_preferida&quot;	TEXT NOT NULL,
+	&quot;Presupuesto&quot; 			INTEGER NOT NULL DEFAULT 0,
+	&quot;Tiempo&quot; 				REAL NOT NULL DEFAULT 0,
+	&quot;Admin&quot;					INTEGER NOT NULL DEFAULT 0,
+	&quot;Habilitado&quot;			INTEGER NOT NULL DEFAULT 1,
+	
+	
+	PRIMARY KEY (&quot;id&quot; AUTOINCREMENT),
+	FOREIGN KEY(&quot;Atraccion_preferida&quot;) REFERENCES TipoAtraccion(&quot;Tipo&quot;)
+	);
+
+	CREATE TABLE &quot;Itinerario&quot; (
+	&quot;id_itinerario&quot;		INTEGER NOT NULL,
+	&quot;id_usuario&quot;	TEXT NOT NULL,
+	&quot;Atraccion_nombre&quot;	TEXT,
+	&quot;Promocion_nombre&quot;  TEXT,
+	
+	PRIMARY KEY (&quot;id_itinerario&quot; AUTOINCREMENT)
+	FOREIGN KEY(&quot;id_usuario&quot;) REFERENCES Usuarios(&quot;id&quot;)
+	FOREIGN KEY(&quot;Atraccion_nombre&quot;) REFERENCES Atracciones(&quot;Nombre&quot;)
+	FOREIGN KEY(&quot;Promocion_nombre&quot;) REFERENCES Promociones(&quot;Nombre&quot;)
+	
+	);
+	
+insert into TipoAtraccion (Tipo) values (&quot;Paisaje&quot;);
+insert into TipoAtraccion (Tipo) values (&quot;Degustacion&quot;);
+insert into TipoAtraccion (Tipo) values (&quot;Aventura&quot;);
+	
+	
+	
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;Moria&quot;,10,2,6,&quot;Aventura&quot;);
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;Minas Tirith&quot;,5,2.5,25,&quot;Paisaje&quot;);
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;La Comarca&quot;,3,6.5,150,&quot;Degustacion&quot;);
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;Mordor&quot;,25,3,4,&quot;Aventura&quot;);
+
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;Abismo de Helm&quot;,5,2,15,&quot;Paisaje&quot;);
+
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;Lothlórien&quot;,35,1,30,&quot;Degustacion&quot;);
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;Erebor&quot;,12,3,32,&quot;Paisaje&quot;);
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;Bosque Negro&quot;,3,4,12,&quot;Aventura&quot;);
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;Parque De La Costa&quot;,30,3.5,80,&quot;Aventura&quot;);
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;Parque San Carlos&quot;,50,5,6,&quot;Paisaje&quot;);
+insert into Atracciones (Nombre,Costo,Tiempo,Cupo,Tipo) values (&quot;Bodega Rutini&quot;,10,2,15,&quot;Degustacion&quot;);
+
+insert into Usuarios (Nombre, Password, Atraccion_preferida,Presupuesto,Tiempo) values (&quot;Eowyn&quot;, &quot;123456789&quot;,&quot;Aventura&quot;,10 , 8);
+insert into Usuarios (Nombre, Password, Atraccion_preferida,Presupuesto,Tiempo) values (&quot;Gandalf&quot;, &quot;123456789&quot;,&quot;Paisaje&quot;,100 , 5);
+
+insert into Usuarios (Nombre, Password,Atraccion_preferida,Presupuesto,Tiempo) values (&quot;Sam&quot;, &quot;123456789&quot;,&quot;Degustacion&quot;,36 , 8);
+insert into Usuarios (Nombre, Password,Atraccion_preferida,Presupuesto,Tiempo) values (&quot;Galadriel&quot;, &quot;123456789&quot;,&quot;Paisaje&quot;,120 , 6);
+insert into Usuarios (Nombre, Password,Atraccion_preferida,Presupuesto,Tiempo, Admin) values (&quot;Eze&quot;, &quot;Eze&quot;,&quot;Degustacion&quot;,999 , 24, 1);
+insert into Usuarios (Nombre, Password,Atraccion_preferida,Presupuesto,Tiempo, Admin) values (&quot;Nahue&quot;, &quot;Nahue&quot;,&quot;Aventura&quot;,999 , 24, 1);
+
+ 
+ 
+----------------------pack1-----------------------
+
+ INSERT into Promociones (Nombre, Tipo_atraccion) values (&quot;Pack1&quot;,&quot;Aventura&quot;);
+ insert into Porcentual (Nombre,Descuento) values (&quot;Pack1&quot;,20);
+
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack1&quot;,&quot;Bosque Negro&quot;);
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack1&quot;,&quot;Mordor&quot;);
+ 
+ -------------------------------------------
+ ---------------------pack2--------------------------
+ INSERT into Promociones (Nombre, Tipo_atraccion) values (&quot;Pack2&quot;,&quot;Degustacion&quot;);
+ insert into Absoluta (Nombre,Precio) values (&quot;Pack2&quot;,36);
+
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack2&quot;,&quot;Lothlórien&quot;);
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack2&quot;,&quot;La Comarca&quot;);
+ -----------------------------------------------
+ 
+  ---------------------pack3--------------------------
+ INSERT into Promociones (Nombre, Tipo_atraccion) values (&quot;Pack3&quot;,&quot;Paisaje&quot;);
+ insert into AXB (Nombre,Atraccion_gratis) values (&quot;Pack3&quot;,&quot;Erebor&quot;);
+
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack3&quot;,&quot;Minas Tirith&quot;);
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack3&quot;,&quot;Abismo de Helm&quot;);
+ -----------------------------------------------
+ 
+   ---------------------pack4--------------------------
+ INSERT into Promociones (Nombre, Tipo_atraccion) values (&quot;Pack4&quot;,&quot;Paisaje&quot;);
+ insert into Porcentual (Nombre,Descuento) values (&quot;Pack4&quot;,15);
+
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack4&quot;,&quot;Parque San Carlos&quot;);
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack4&quot;,&quot;Abismo de Helm&quot;);
+ -----------------------------------------------
+ 
+   ---------------------pack5--------------------------
+ INSERT into Promociones (Nombre, Tipo_atraccion) values (&quot;Pack5&quot;,&quot;Paisaje&quot;);
+ insert into Absoluta (Nombre,Precio) values (&quot;Pack5&quot;,38);
+
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack5&quot;,&quot;Parque De La Costa&quot;);
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack5&quot;,&quot;Moria&quot;);
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack5&quot;,&quot;Bosque Negro&quot;);
+ -----------------------------------------------
+ 
+  ---------------------pack6--------------------------
+ INSERT into Promociones (Nombre, Tipo_atraccion) values (&quot;Pack6&quot;,&quot;Degustacion&quot;);
+ insert into AXB (Nombre,Atraccion_gratis) values (&quot;Pack6&quot;,&quot;La Comarca&quot;);
+
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack6&quot;,&quot;Bodega Rutini&quot;);
+ INSERT INTO Promocion_Atraccion (&quot;Nombre_promocion&quot;,&quot;Nombre_atraccion&quot;) VALUES (&quot;Pack6&quot;,&quot;Lothlórien&quot;);
+ -----------------------------------------------
+ 
+ SELECT * FROM Usuarios;</sql><current_tab id="0"/></tab_sql></sqlb_project>

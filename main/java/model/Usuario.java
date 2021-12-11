@@ -54,23 +54,37 @@ public class Usuario {
 				+ ", atraccionPreferida=" + atraccionPreferida + "]";
 	}
 	public boolean checkPassword(String password) {
-		return this.password.equals(password);
+		return password.equals(this.password);
 	}
-	public int getPresupuesto() {
-		return presupuesto;
+
+	//Todos los get()-----------------------------------------------------------------------
+	public Integer getId() {
+		return this.id;
 	}
 	public String getNombre() {
 		return this.username;
 	}
+	
+	public String getPass() {
+		return this.password;
+	}
+	public boolean isAdmin() {
+		return this.admin;
+	}
+	public int getPresupuesto() {
+		return presupuesto;
+	}
 	public double getTiempoDisponible() {
 		return tiempoDisponible;
-	}
-	public List<Ofertables> getItinerario(){
-		return this.itinerario;
 	}
 	public TipoDeAtraccion getAtraccionPreferida() {
 		return atraccionPreferida;
 	}
+	public List<Ofertables> getItinerario(){
+		return this.itinerario;
+	}
+
+	//Fin todos los get()----------------------------------------------------------------------
 	public boolean puedeComprar(Ofertables oferta) {
 		for (Ofertables atraccion:this.itinerario) {
 			if (oferta.esOContiene(atraccion)) {
@@ -130,4 +144,5 @@ public class Usuario {
 	public boolean isNull() {
 		return false;
 	}
+
 }
