@@ -12,7 +12,7 @@
 	
 	<h2> Editar el Usuario </h2>
 			
-	<form action="usuario/edit.adm" method="post">
+	<form action="edit.adm" method="post">
 			<input type="hidden" name="id" value="${ userInstance.getId() }">
 		<jsp:include page="form.jsp"></jsp:include>
 	</form>

@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Usuario;
-import service.UsuarioService;
+import services.UsuarioService;
 
 @WebServlet("/usuario/create.adm")
 public class CreateUsuarioServlet extends HttpServlet implements Servlet {

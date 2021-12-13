@@ -16,7 +16,6 @@ import persistence.dao.UsuarioDAO;
 
 public class UsuarioDAOImplement implements UsuarioDAO{
 
-	//Nombre - Atraccion preferida - Presupuesto - Tiempo - id_usuario
 	@Override
 	public int update(Usuario user){
 		Integer nuevoPresu = user.getPresupuesto();
@@ -130,12 +129,12 @@ public class UsuarioDAOImplement implements UsuarioDAO{
 
 	private Usuario toUser(ResultSet resultados) throws SQLException {
 		ItinerarioDAOImplement itDAO = DAOFactory.getItinerarioDAO();
-		if (!itDAO.tieneItinerario(resultados.getString("Nombre"))) {
+		if (!itDAO.tieneItinerario(resultados.getInt("id"))) {
 
 			return new Usuario(resultados.getInt("id"),
 					resultados.getString("Nombre"),
 					resultados.getString("Password"),
-					resultados.getInt("id")==1,
+					resultados.getInt("Admin")==1,
 					resultados.getInt("Presupuesto"),
 					Double.parseDouble(resultados.getString("Tiempo")),
 					TipoDeAtraccion.valueOf(resultados.getString("Atraccion_Preferida")));
@@ -143,12 +142,29 @@ public class UsuarioDAOImplement implements UsuarioDAO{
 			return new Usuario(resultados.getInt("id"),
 					resultados.getString("Nombre"),
 					resultados.getString("Password"),
-					resultados.getInt("id")==1,
+					resultados.getInt("Admin")==1,
 					resultados.getInt("Presupuesto"),
 					Double.parseDouble(resultados.getString("Tiempo")),
 					TipoDeAtraccion.valueOf(resultados.getString("Atraccion_Preferida")),
-					itDAO.buscarPorUsuario(resultados.getString("Nombre")));
+					itDAO.buscarPorUsuario(resultados.getInt("id")));
 
+		}
+	}
+
+
+	@Override
+	public int delete(int id) {
+		try {
+			String sql = "UPDATE Usuarios SET Habilitado = 0 WHERE ID = ?";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MiDataException(e);
 		}
 	}
 

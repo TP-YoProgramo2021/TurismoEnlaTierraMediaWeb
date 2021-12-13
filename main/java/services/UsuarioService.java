@@ -1,6 +1,8 @@
 package services;
 
 import java.util.List;
+
+import model.TipoDeAtraccion;
 import model.Usuario;
 import persistence.commons.DAOFactory;
 
@@ -14,8 +16,8 @@ public class UsuarioService {
 		DAOFactory.getUsuarioDAO().delete(id);
 	}
 	
-	public Usuario update(Integer id, String name, String password, Double money) {
-		Usuario user = new Usuario(id, name, password, money);
+	public Usuario update(Integer id, String nombre, String password, Boolean admin, int presupuesto, double tiempo, TipoDeAtraccion atr_preferida) {
+		Usuario user = new Usuario(id, nombre, password, admin, presupuesto, tiempo, atr_preferida);
 		if(user.isValid()) {
 			DAOFactory.getUsuarioDAO().update(user);
 		}

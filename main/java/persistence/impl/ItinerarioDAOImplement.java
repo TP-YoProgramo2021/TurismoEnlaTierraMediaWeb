@@ -19,12 +19,12 @@ import model.Usuario;
 public class ItinerarioDAOImplement {
 	public int insert(Usuario user, Atraccion atr) {
 		try {
-			String sql = "INSERT INTO Itinerario (Usuario_nombre, Atraccion_nombre) VALUES (?, ?)";
+			String sql = "INSERT INTO Itinerario (id_usuario, Atraccion_nombre) VALUES (?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, user.getNombre());
+			statement.setInt(1, user.getId());
 			statement.setString(2, atr.getNombre());
 			int rows =0;
 			try {
@@ -40,13 +40,13 @@ public class ItinerarioDAOImplement {
 			throw new MiDataException(e);
 		}
 	}
-	public boolean tieneItinerario(String userName) {
+	public boolean tieneItinerario(int id) {
 		try {
 			String sql = "SELECT COUNT(*) AS TOTAL FROM Itinerario WHERE id_usuario = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, userName);
+			statement.setInt(1, id);
 			ResultSet resultados = statement.executeQuery();
 
 			resultados.next();
@@ -57,14 +57,14 @@ public class ItinerarioDAOImplement {
 			throw new MiDataException(e);
 		}
 	}
-	public List<Ofertables> buscarPorUsuario(String userName){
+	public List<Ofertables> buscarPorUsuario(int id){
 		try {
 			
-			String sql = "SELECT Atraccion_nombre FROM Itinerario WHERE Usuario_nombre = ?";
+			String sql = "SELECT Atraccion_nombre FROM Itinerario WHERE id_usuario = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, userName);
+			statement.setInt(1, id);
 			ResultSet resultados = statement.executeQuery();
 		
 			List<Ofertables> itinerario = new LinkedList<Ofertables>();

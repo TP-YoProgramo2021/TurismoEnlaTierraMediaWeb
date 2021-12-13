@@ -13,7 +13,7 @@
 	<h2>Estos son los Usuarios</h2>
 
 	<c:if test="${ user.isAdmin() }">
-		<a href="/turismo/usuario/create.adm"> Crear nuevo Usuario </a>
+		<a href="usuario/create.adm"> Crear nuevo Usuario </a>
 	</c:if>
 
 	<table>
@@ -38,13 +38,14 @@
 					<td><c:out value="${ usuario.isAdmin()? 'Si' : 'No' }"></c:out>
 					<td><c:out value="${ usuario.getPresupuesto() }"></c:out></td>
 					<td><c:out value="${ usuario.getTiempoDisponible() }"></c:out></td>
+					<td><c:out value="${ usuario.getAtraccionPreferida() }"></c:out></td>
 
-					<td><a href="/turismo/usuario/edit.adm?id=${usuario.getId()}"
+					<td><a href="edit.adm?id=${usuario.getId()}"
 						class="btn btn-light rounded-0" role="button"><i
-							class="bi bi-pencil-fill"></i></a> <a
-						href="/turismo/usuario/delete.adm?id=${usuario.getId()}"
+							class="bi bi-pencil-fill">Editar</i></a> <a
+						href="usuario/delete.adm?id=${usuario.getId()}"
 						class="btn btn-danger rounded" role="button"><i
-							class="bi bi-x-circle-fill"></i></a>
+							class="bi bi-x-circle-fill">Borrar</i></a>
 
 					</td>
 				</tr>
