@@ -18,19 +18,27 @@ public class UsuarioDAOImplement implements UsuarioDAO{
 
 	@Override
 	public int update(Usuario user){
-		Integer nuevoPresu = user.getPresupuesto();
-		Double nuevoTiempo = user.getTiempoDisponible();
-		
+		Integer new_id = user.getId();
+		String new_nombre = user.getNombre();
+		String new_password = user.getPass();
+		Integer new_admin = user.isAdmin()? 1:0;
+		Integer new_presupuesto = user.getPresupuesto();
+		Double new_tiempo = user.getTiempoDisponible();
+		String new_atrPreferida = user.getAtraccionPreferida().toString();
 			try {
 				
-				String sql = "UPDATE USUARIOS SET PRESUPUESTO = ?, TIEMPO = ?  WHERE NOMBRE = ?";
+				String sql = "UPDATE USUARIOS SET Nombre = ?, Password = ?, Admin = ?, Presupuesto = ?, Tiempo = ?, Atraccion_Preferida = ?  WHERE id = ?";
 				Connection conn = ConnectionProvider.getConnection();
 				conn.setAutoCommit(false);
 	
 				PreparedStatement statement = conn.prepareStatement(sql);
-				statement.setInt(1, nuevoPresu);
-				statement.setFloat(2, Float.parseFloat(nuevoTiempo.toString()));
-				statement.setString(3, user.getNombre());
+				statement.setString(1, new_nombre);
+				statement.setString(2, new_password);
+				statement.setInt(3, new_admin);
+				statement.setInt(4, new_presupuesto);
+				statement.setFloat(5, Float.parseFloat(new_tiempo.toString()));
+				statement.setString(6, new_atrPreferida);
+				statement.setInt(7, new_id);
 				int rows = 0;
 				try {
 					rows = statement.executeUpdate();	
@@ -151,7 +159,25 @@ public class UsuarioDAOImplement implements UsuarioDAO{
 		}
 	}
 
+	public int insert(Usuario user) {
+		try {
+			String sql = "INSERT INTO usuario (name, password, admin, money) VALUES (?, ?, ?, ?)";
+			Connection conn = ConnectionProvider.getConnection();
 
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, user.getNombre());
+			statement.setString(2, user.getPass());
+			statement.setInt(3, user.isAdmin()? 1 : 0);
+			statement.setDouble(4, user.getPresupuesto());
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MiDataException(e);
+		}
+		
+		
+	}
 	@Override
 	public int delete(int id) {
 		try {

@@ -16,7 +16,7 @@ public class Usuario {
 	private Integer id;
 	private String username, password;
 	private Boolean admin;
-	private Boolean habilitado = true;
+	//private Boolean habilitado = true;
 	private int presupuesto;
 	private double tiempoDisponible;
 	private TipoDeAtraccion atraccionPreferida;
@@ -157,6 +157,7 @@ public class Usuario {
 		else if(password.length() < 6) errors.put("password", "La contraseña debe tener al menos 6 caracteres");
 		if(presupuesto < 0) errors.put("presupuesto", "El dinero debe ser positivo");
 		if(tiempoDisponible < 0.0) errors.put("tiempo", "El tiempo debe ser positivo");
+		
 		
 		return errors;
 	}	
