@@ -5,13 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<jsp:include page="/partials/head.jsp"></jsp:include>
 <title>Crear Usuario</title>
 </head>
-<body>
+<body style ="background-color: #26547C ;">
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
-	
-	<h2> Crear el Usuario </h2>
-			
+
 	<form action="create.adm" method="post">
 		<jsp:include page="form.jsp"></jsp:include>
 	</form>

@@ -5,52 +5,81 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<jsp:include page="/partials/head.jsp"></jsp:include>
 <title>Usuarios</title>
 </head>
-<body>
+<body style ="background-color: #26547C ;">
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
 
-	<h2>Estos son los Usuarios</h2>
+	<main class="container">
 
-	<c:if test="${ user.isAdmin() }">
-		<a href="usuario/create.adm"> Crear nuevo Usuario </a>
-	</c:if>
 
-	<table>
-		<thead>
-			<tr>
-				<td>id</td>
-				<td>Nombre</td>
-				<td>Password</td>
-				<td>Admin</td>
-				<td>Dinero</td>
-				<td>Tiempo</td>
-				<td>Tipo de Atraccion Preferida</td>
-				<td>Acciones</td>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${ userList }" var="usuario">
+		<c:if test="${flash != null}">
+			<div class="alert alert-danger">
+				<p>
+					<c:out value="${flash}" />
+					<c:if test="${errors != null}">
+						<ul>
+							<c:forEach items="${errors}" var="entry">
+								<li><c:out value="${entry.getValue()}"></c:out></li>
+							</c:forEach>
+						</ul>
+					</c:if>
+				</p>
+			</div>
+		</c:if>
+
+
+		<div class="bg-light p-4 mb-3 rounded">
+			<h2 >Usuarios de la Tierra Media</h2>
+		</div>
+
+
+		<c:if test="${user.isAdmin()}">
+			<div class="mb-3">
+				<a href="usuario/create.adm" class="btn btn-primary" role="button">
+					<i class="bi bi-plus-lg"></i> Crear nuevo Usuario
+				</a>
+			</div>
+		</c:if>
+
+
+
+		<table
+			class="table table-dark table-stripped table-hover table-bordered">
+			<thead>
 				<tr>
-					<td><c:out value="${ usuario.getId() }"></c:out></td>
-					<td><c:out value="${ usuario.getNombre() }"></c:out></td>
-					<td><c:out value="${ usuario.getPass() }"></c:out></td>
-					<td><c:out value="${ usuario.isAdmin()? 'Si' : 'No' }"></c:out>
-					<td><c:out value="${ usuario.getPresupuesto() }"></c:out></td>
-					<td><c:out value="${ usuario.getTiempoDisponible() }"></c:out></td>
-					<td><c:out value="${ usuario.getAtraccionPreferida() }"></c:out></td>
-
-					<td><a href="edit.adm?id=${usuario.getId()}"
-						class="btn btn-light rounded-0" role="button"><i
-							class="bi bi-pencil-fill">Editar</i></a> <a
-						href="usuario/delete.adm?id=${usuario.getId()}"
-						class="btn btn-danger rounded" role="button"><i
-							class="bi bi-x-circle-fill">Borrar</i></a>
-
-					</td>
+					<th>id</td>
+					<th>Nombre</td>
+					<th>Password</td>
+					<th>Admin</td>
+					<th>Dinero</td>
+					<th>Tiempo</td>
+					<th>Tipo de Atraccion Preferida</td>
+					<th>Acciones</td>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach items="${ userList }" var="usuario">
+					<tr>
+						<td><c:out value="${ usuario.getId() }"></c:out></td>
+						<td><c:out value="${ usuario.getNombre() }"></c:out></td>
+						<td><c:out value="${ usuario.getPass() }"></c:out></td>
+						<td><c:out value="${ usuario.isAdmin()? 'Si' : 'No' }"></c:out>
+						<td><c:out value="${ usuario.getPresupuesto() }"></c:out></td>
+						<td><c:out value="${ usuario.getTiempoDisponible() }"></c:out></td>
+						<td><c:out value="${ usuario.getAtraccionPreferida() }"></c:out></td>
+
+						<td><a href="edit.adm?id=${usuario.getId()}"
+							class="btn btn-light rounded-0" role="button"><i
+								class="bi bi-pencil-fill">Editar</i></a> <a
+							href="usuario/delete.adm?id=${usuario.getId()}"
+							class="btn btn-danger rounded" role="button"><i
+								class="bi bi-x-circle-fill">Borrar</i></a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</main>
 </body>
 </html>

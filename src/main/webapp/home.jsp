@@ -2,8 +2,17 @@
 <html>
 <head>
 <jsp:include page="partials/head.jsp"></jsp:include>
+ <style>
+body {
+  background-image: url('/TurismoTierraMediaWeb/assets/img/durindoor.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  
+}
+</style> 
 </head>
-<body>
+<body style ="background-color: #26547C ;">
 
 	<jsp:include page="partials/nav.jsp"></jsp:include>
 
@@ -16,3 +25,4 @@
 	</main>
 </body>
 </html>
+

@@ -1,0 +1,30 @@
+{
+	"folders": {},
+	"connections": {
+		"sqlite_jdbc-17db916434d-5fa6f263c6cd8ad8": {
+			"provider": "sqlite",
+			"driver": "sqlite_jdbc",
+			"name": "tierraMedia.db",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"database": "C:\\Users\\Nahuel\\git\\TurismoTierraMediaWeb\\tierraMedia.db",
+				"url": "jdbc:sqlite:C:\\Users\\Nahuel\\git\\TurismoTierraMediaWeb\\tierraMedia.db",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}
