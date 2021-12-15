@@ -12,7 +12,7 @@ import services.UsuarioService;
 
 @WebServlet("/usuario/delete.adm")
 public class DeleteUsuarioServlet extends HttpServlet implements Servlet {
-	private static final long serialVersionUID = -5506851070266130036L;
+	private static final long serialVersionUID = 2193190369809343386L;
 	UsuarioService usuarioService;
 	
 	@Override
@@ -25,6 +25,6 @@ public class DeleteUsuarioServlet extends HttpServlet implements Servlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Integer id = Integer.parseInt(req.getParameter("id"));
 		usuarioService.delete(id);
-		resp.sendRedirect("/webapp/usuario/list.adm");
+		resp.sendRedirect("/TurismoTierraMediaWeb/usuario/list.adm");
 	}
 }

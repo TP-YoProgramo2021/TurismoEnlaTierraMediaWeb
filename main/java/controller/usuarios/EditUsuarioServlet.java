@@ -53,7 +53,7 @@ public class EditUsuarioServlet extends HttpServlet implements Servlet {
 			tiempo = Double.parseDouble(req.getParameter("tiempo"));
 			atr_preferida = TipoDeAtraccion.valueOf(req.getParameter("atr_preferida"));
 		} catch (Exception e) {
-			
+			req.setAttribute("errors", "Error en la carga. Datos invalidos");
 		}
 
 		Usuario user = usuarioService.update(id, username, password, admin, presupuesto, tiempo, atr_preferida);

@@ -17,7 +17,7 @@
 					aria-current="page" href="/TurismoTierraMediaWeb/attractions/index.do">Mi	Itinerario</a></li>
 				<c:if test="${user.isAdmin() }">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="usuario/list.adm">Usuarios</a></li>
+						aria-current="page" href="/TurismoTierraMediaWeb/usuario/list.adm">Usuarios</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/TurismoTierraMediaWeb/usuarios/index.adm">Atracciones</a></li>
 					<li class="nav-item"><a class="nav-link active"
@@ -44,7 +44,7 @@
 								<c:out value="${user.getTiempoDisponible()}h"></c:out>
 						</a></li>
 						<li><hr class="dropdown-divider"></li>
-						<li><a href="logout" class="dropdown-item">Salir</a></li>
+						<li><a href="/TurismoTierraMediaWeb/logout" class="dropdown-item">Salir</a></li>
 					</ul></li>
 			</ul>
 		</div>

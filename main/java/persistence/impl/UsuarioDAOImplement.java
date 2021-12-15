@@ -174,6 +174,7 @@ public class UsuarioDAOImplement implements UsuarioDAO{
 			return rows;
 		} catch (Exception e) {
 			throw new MiDataException(e);
+			
 		}
 		
 		

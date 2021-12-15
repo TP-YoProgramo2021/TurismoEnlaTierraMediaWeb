@@ -152,11 +152,11 @@ public class Usuario {
 	public HashMap<String, String> validate(){
 		HashMap<String, String> errors = new HashMap<String, String>();
 		
-		if(username.isBlank()) errors.put("name", "El nombre es requerido");	
-		if(password.isBlank()) errors.put("password", "La contraseña es requerida");
-		else if(password.length() < 6) errors.put("password", "La contraseña debe tener al menos 6 caracteres");
-		if(presupuesto < 0) errors.put("presupuesto", "El dinero debe ser positivo");
-		if(tiempoDisponible < 0.0) errors.put("tiempo", "El tiempo debe ser positivo");
+		if(this.getNombre().isBlank()) errors.put("name", "El nombre es requerido");	
+		if(this.getPass().isBlank()) errors.put("password", "La contraseña es requerida");
+		else if(this.getPass().length() < 6) errors.put("password", "La contraseña debe tener al menos 6 caracteres");
+		if(this.getPresupuesto() < 0) errors.put("presupuesto", "El dinero debe ser positivo");
+		if(this.getTiempoDisponible() < 0.0) errors.put("tiempo", "El tiempo debe ser positivo");
 		
 		
 		return errors;

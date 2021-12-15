@@ -28,8 +28,9 @@ public class UsuarioService {
 		return DAOFactory.getUsuarioDAO().findById(id);
 	}
 	
-	public Usuario create(String name, String password, Double money) {
-		Usuario user = new Usuario(name, password, money);
+	public Usuario create(Integer id, String nombre, String password, Boolean admin, int presupuesto, double tiempoDisponible, TipoDeAtraccion atraccionPreferida) {
+		Usuario user = new Usuario(id, nombre, password, admin, presupuesto, tiempoDisponible, atraccionPreferida);
+		System.out.println(user.toString());
 		if(user.isValid()) {
 			DAOFactory.getUsuarioDAO().insert(user);
 		}

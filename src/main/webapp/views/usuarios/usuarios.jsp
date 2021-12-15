@@ -37,7 +37,7 @@
 
 		<c:if test="${user.isAdmin()}">
 			<div class="mb-3">
-				<a href="usuario/create.adm" class="btn btn-primary" role="button">
+				<a href="/TurismoTierraMediaWeb/usuario/create.adm" class="btn btn-primary" role="button">
 					<i class="bi bi-plus-lg"></i> Crear nuevo Usuario
 				</a>
 			</div>
@@ -70,10 +70,10 @@
 						<td><c:out value="${ usuario.getTiempoDisponible() }"></c:out></td>
 						<td><c:out value="${ usuario.getAtraccionPreferida() }"></c:out></td>
 
-						<td><a href="edit.adm?id=${usuario.getId()}"
+						<td><a href="/TurismoTierraMediaWeb/usuario/edit.adm?id=${usuario.getId()}"
 							class="btn btn-light rounded-0" role="button"><i
 								class="bi bi-pencil-fill">Editar</i></a> <a
-							href="usuario/delete.adm?id=${usuario.getId()}"
+							href="/TurismoTierraMediaWeb/usuario/delete.adm?id=${usuario.getId()}"
 							class="btn btn-danger rounded" role="button"><i
 								class="bi bi-x-circle-fill">Borrar</i></a></td>
 					</tr>

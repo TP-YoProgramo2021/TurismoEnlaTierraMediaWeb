@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.TipoDeAtraccion;
 import model.Usuario;
 import services.UsuarioService;
 
@@ -31,15 +32,37 @@ public class CreateUsuarioServlet extends HttpServlet implements Servlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
-		Double money = Double.parseDouble(req.getParameter("money"));
+		
+		Integer id = 0;
+		String username="";
+		String password="";
+		Boolean admin=false;
+		int presupuesto=0;
+		Double tiempo=0.0;
+		TipoDeAtraccion atr_preferida=null;		
+		try {
+
+			id = Integer.parseInt(req.getParameter("id"));
+			username = req.getParameter("username");
+			password = req.getParameter("password");
+			admin = "SI".equals(req.getParameter("admin").toUpperCase());
+			presupuesto = Integer.parseInt(req.getParameter("presupuesto"));
+			tiempo = Double.parseDouble(req.getParameter("tiempo"));
+			atr_preferida = TipoDeAtraccion.valueOf(req.getParameter("atr_preferida"));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			
-		Usuario user = usuarioService.create(username, password, money);
+		}
+		
+		
+		
+		Usuario user = usuarioService.create(id, username, password, admin, presupuesto, tiempo, atr_preferida);
 		
 		if(user.isValid()) {
 			resp.sendRedirect("list.adm");
+			System.out.println("Valido");
 		} else {
+			System.out.println("InValido");
 			req.setAttribute("errors", user.validate());
 			req.setAttribute("userInstance", user);
 
