@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="/partials/head.jsp"></jsp:include>
+<script src="script.js" defer></script>
 <title>Editar Usuario</title>
 </head>
 <body style ="background-color: #26547C ;">

@@ -12,7 +12,7 @@
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav me-auto mb-2 mb-md-0">
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="/TurismoTierraMediaWeb/attractions/index.do">Ofertas</a></li>
+					aria-current="page" href="/TurismoTierraMediaWeb/oferta/list.do">Ofertas</a></li>
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="/TurismoTierraMediaWeb/attractions/index.do">Mi	Itinerario</a></li>
 				<c:if test="${user.isAdmin() }">

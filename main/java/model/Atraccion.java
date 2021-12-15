@@ -6,8 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import dao.AtraccionesDAO;
-import dao.DAOFactory;
+import persistence.dao.AtraccionesDAO;
+import persistence.commons.DAOFactory;
 
 public class Atraccion implements Ofertables {
 	private String nombre;
@@ -38,26 +38,25 @@ public class Atraccion implements Ofertables {
 		return this.tiempo;
 	}
 	
-	public int getCupo() {
+	public int enStock() {
 		return this.cupos;
 	}
 	@Override
 	public TipoDeAtraccion getTipo() {
-		// TODO Auto-generated method stub
 		return this.tipoDeAtraccion;
 	}
 	@Override
 	public boolean hayCupo() {
-		// TODO Auto-generated method stub
 		return this.cupos>0;
 	}
 	@Override
 	public boolean esPromocion() {
-		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 	public void restarUnCupo() throws Exception {
 		AtraccionesDAO atrDAO =DAOFactory.getAtraccionDAO();
@@ -95,5 +94,14 @@ public class Atraccion implements Ofertables {
 	@Override
 	public boolean esOContiene(Ofertables oferta) {
 		return this.equals(oferta);
+	}
+	@Override
+	public String atrIncluidas() {
+		String atrs = "";
+		for (Atraccion atr : this.atraccionesIncluidas()) {
+			atrs+= (atr.getNombre()+", ");
+		}
+		atrs=atrs.substring(0, atrs.length() - 2);
+		return atrs;
 	}
 }

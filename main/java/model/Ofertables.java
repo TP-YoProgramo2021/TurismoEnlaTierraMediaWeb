@@ -10,6 +10,9 @@ public TipoDeAtraccion getTipo();
 public boolean hayCupo();
 public boolean esPromocion();
 public List<Atraccion> atraccionesIncluidas();
+public String atrIncluidas();
 public boolean esOContiene(Ofertables oferta);
+public String getNombre();
+public int enStock();
 
 }

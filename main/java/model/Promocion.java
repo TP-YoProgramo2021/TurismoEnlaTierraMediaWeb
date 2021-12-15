@@ -2,6 +2,8 @@ package model;
 
 
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -100,5 +102,28 @@ public abstract class Promocion implements Ofertables{
 		return false;
 	}
 	
+	@Override
+	public int enStock() {
+		ArrayList<Integer> cupos = new ArrayList<Integer>();
+		for(Atraccion atr : this.atraccionesIncluidas()) {
+			cupos.add(atr.enStock());
+		}
+		return Collections.min(cupos);
+	}
+	
+	@Override
+	public String atrIncluidas() {
+		String atrs = "";
+		for (Atraccion atr : this.atraccionesIncluidas()) {
+			atrs+= (atr.getNombre()+", ");
+		}
+		atrs=atrs.substring(0, atrs.length() - 2);
+		return atrs;
+	}
+	
+	@Override
+	public String getNombre() {
+		return this.nombre;
+	}
 	
 }

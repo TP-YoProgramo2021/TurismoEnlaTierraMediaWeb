@@ -7,13 +7,18 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import persistence.dao.AtraccionesDAO;
+import persistence.commons.DAOFactory;
+import persistence.dao.PromocionesDAO;
 import persistence.commons.ConnectionProvider;
 import persistence.commons.MiDataException;
-import persistence.dao.AtraccionesDAO;
+import persistence.dao.OfertablesDAO;
 import model.Atraccion;
+import model.Ofertables;
+import model.Promocion;
 import model.TipoDeAtraccion;
 
-public class AtraccionDAOImplement implements AtraccionesDAO {
+public class OfertablesDAOImplement implements OfertablesDAO {
 
 	//
 	public int update(Atraccion atr) {
@@ -73,27 +78,16 @@ public class AtraccionDAOImplement implements AtraccionesDAO {
 				resultados.getInt("Cupo"), TipoDeAtraccion.valueOf(resultados.getString("Tipo")));
 	}
 
-	public List<Atraccion> findAll() {
-
-		try {
-
-			String sql = "SELECT * FROM ATRACCIONES as a WHERE a.Habilitado = 1;";
-			Connection conn = ConnectionProvider.getConnection();
-			conn.setAutoCommit(false);
-			PreparedStatement statement = conn.prepareStatement(sql);
-			ResultSet resultados = statement.executeQuery();
-
-			List<Atraccion> usuarios = new LinkedList<Atraccion>();
-			while (resultados.next()) {
-				usuarios.add(toAtraccion(resultados));
-			}
-
-			return usuarios;
-
-		} catch (Exception e) {
-			throw new MiDataException(e);
-		}
-
+	public List<Ofertables> findAll() {
+		AtraccionesDAO atrDAO = DAOFactory.getAtraccionDAO();
+		PromocionesDAO promoDAO = DAOFactory.getPromocionDAO();
+		List<Ofertables> sugerencia = new LinkedList<Ofertables>();
+		List<Atraccion> atracciones = atrDAO.findAll();
+		List<Promocion> packs = promoDAO.findAll();
+		sugerencia.addAll(packs);
+		sugerencia.addAll(atracciones);
+		return sugerencia;
+		
 	}
 
 	@Override

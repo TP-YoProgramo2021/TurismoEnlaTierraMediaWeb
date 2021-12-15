@@ -41,15 +41,22 @@ public class CreateUsuarioServlet extends HttpServlet implements Servlet {
 		Double tiempo=0.0;
 		TipoDeAtraccion atr_preferida=null;		
 		try {
-
-			id = Integer.parseInt(req.getParameter("id"));
-			username = req.getParameter("username");
-			password = req.getParameter("password");
 			admin = "SI".equals(req.getParameter("admin").toUpperCase());
+			System.out.println("admin: "+admin);
 			presupuesto = Integer.parseInt(req.getParameter("presupuesto"));
+			System.out.println("presupuesto: "+presupuesto);
 			tiempo = Double.parseDouble(req.getParameter("tiempo"));
+			System.out.println("tiempo: "+tiempo);
 			atr_preferida = TipoDeAtraccion.valueOf(req.getParameter("atr_preferida"));
+			System.out.println("atr preferida: "+atr_preferida);
+			username = req.getParameter("username");
+			System.out.println("username: "+username);
+			password = req.getParameter("password");
+			System.out.println("password: "+password);
+
+			
 		} catch (Exception e) {
+			System.out.println(id+username+password+admin.toString()+presupuesto+tiempo+atr_preferida);
 			System.out.println(e.getMessage());
 			
 		}

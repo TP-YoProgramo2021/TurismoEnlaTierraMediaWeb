@@ -62,6 +62,10 @@ public class Usuario {
 	public Integer getId() {
 		return this.id;
 	}
+	public LinkedList<Ofertables> sugerencia(LinkedList<Ofertables> ofertas){
+		ofertas.sort(new ComparadorParaSugerencias(this.getAtraccionPreferida()));
+		return ofertas;
+	}
 	public String getNombre() {
 		return this.username;
 	}
