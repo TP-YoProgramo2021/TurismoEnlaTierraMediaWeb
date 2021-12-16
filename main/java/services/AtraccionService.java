@@ -14,13 +14,13 @@ public class AtraccionService {
 		return DAOFactory.getAtraccionDAO().findAll();
 	}
 
-	public Atraccion create(String name, Integer cost, Double duration, Integer capacity) {
+	public Atraccion create(String nombre, int costo, double tiempo, int cupos, TipoDeAtraccion tipoDeAtraccion){
 
-		Atraccion attraction = new Atraccion(-1, name, cost, duration, capacity);
+		Atraccion attraction = new Atraccion(nombre, costo, tiempo, cupos, tipoDeAtraccion);
 
 		if (attraction.isValid()) {
-			AtraccionesDAO attractionDAO = DAOFactory.getAtraccionDAO();
-			attractionDAO.insert(attraction);
+			AtraccionDAOImplement atrDAO = (AtraccionDAOImplement) DAOFactory.getAtraccionDAO();
+			atrDAO.insert(attraction);
 			// XXX: si no devuelve "1", es que hubo más errores
 		}
 

@@ -116,5 +116,34 @@ public class AtraccionDAOImplement implements AtraccionesDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public int insert(Atraccion atr) {
+		Connection conn;
+		try {
+			conn = ConnectionProvider.getConnection();
+
+			try {
+				String sql = "INSERT INTO Atracciones (Nombre, Costo, Tiempo, Cupo, Tipo) VALUES (?, ?, ?, ?, ?)";
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setString(1, atr.getNombre());
+				statement.setInt(2, atr.getCosto());
+				statement.setDouble(3, atr.getTiempo());
+				statement.setInt(4, atr.enStock());
+				statement.setString(5, atr.getTipo().toString());
+
+				
+				int rows = statement.executeUpdate();
+				conn.commit();
+				return rows;
+			} catch (Exception e) {
+				conn.rollback();
+				throw new MiDataException(e);
+
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return -1;
+	}
 
 }

@@ -38,7 +38,7 @@
 				</a>
 			</div>
 		</c:if>
-		<table class="table table-stripped table-hover">
+		<table class="table table-dark table-stripped table-hover table-bordered">
 			<thead>
 				<tr>
 					<th>Nombre</th>

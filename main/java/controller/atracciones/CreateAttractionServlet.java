@@ -8,13 +8,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Attraction;
+import model.Atraccion;
+import model.TipoDeAtraccion;
 import services.AtraccionService;
 
-@WebServlet("/attractions/create.do")
+@WebServlet("/atraccion/create.adm")
 public class CreateAttractionServlet extends HttpServlet {
-
-	private static final long serialVersionUID = 3455721046062278592L;
+	private static final long serialVersionUID = 1468685665802187144L;
 	private AtraccionService atraccionService;
 
 	@Override
@@ -26,25 +26,26 @@ public class CreateAttractionServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/attractions/create.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/atracciones/create.jsp");
 		dispatcher.forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = req.getParameter("name");
-		Integer cost = Integer.parseInt(req.getParameter("cost"));
-		Double duration = Double.parseDouble(req.getParameter("duration"));
-		Integer capacity = Integer.parseInt(req.getParameter("capacity"));
+		String nombre = req.getParameter("nombre");
+		Integer costo = Integer.parseInt(req.getParameter("costo"));
 
-		Attraction attraction = atraccionService.create(name, cost, duration, capacity);
-		if (attraction.isValid()) {
-			resp.sendRedirect("/turismo/attractions/index.do");
+		Double tiempo = Double.parseDouble(req.getParameter("tiempo"));
+		Integer cupos = Integer.parseInt(req.getParameter("cupos"));
+		TipoDeAtraccion tipo_atraccion = TipoDeAtraccion.valueOf(req.getParameter("atr_preferida"));
+		Atraccion atraccion = atraccionService.create(nombre, costo, tiempo, cupos, tipo_atraccion);
+
+		if (atraccion.isValid()) {
+			resp.sendRedirect("index.adm");
 		} else {
-			req.setAttribute("attraction", attraction);
+			req.setAttribute("atraccion", atraccion);
 
-			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher("/views/attractions/create.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/atracciones/create.jsp");
 			dispatcher.forward(req, resp);
 		}
 
