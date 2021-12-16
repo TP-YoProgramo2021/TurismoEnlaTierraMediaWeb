@@ -100,14 +100,16 @@ public class AtraccionDAOImplement implements AtraccionesDAO {
 	public int borradoLogico(String nombre) {
 		try {
 			String sql = "UPDATE Atracciones SET Habilitado = 0 WHERE Nombre = ?";
+			System.out.println(sql+nombre);
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, nombre);
 			int rows = statement.executeUpdate();
-
+			System.out.println("Ya actualice");
 			return rows;
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			throw new MiDataException(e);
 		}
 	}

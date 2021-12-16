@@ -23,6 +23,7 @@ public class DeleteAttractionServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String nombre = (String) req.getParameter("nombre");
+		System.out.println("Nombre: "+nombre);
 		atraccionService.delete(nombre);
 
 		resp.sendRedirect("index.adm");

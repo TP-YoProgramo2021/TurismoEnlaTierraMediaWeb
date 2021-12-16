@@ -38,6 +38,7 @@ public class AtraccionService {
 	}
 
 	public void delete(String nombre) {
+		System.out.println("Nombre: "+nombre);
 		AtraccionDAOImplement atrDAO = (AtraccionDAOImplement) DAOFactory.getAtraccionDAO();
 		atrDAO.borradoLogico(nombre);
 	}
