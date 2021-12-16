@@ -14,7 +14,7 @@
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="/TurismoTierraMediaWeb/oferta/list.do">Ofertas</a></li>
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="/TurismoTierraMediaWeb/attractions/index.do">Mi	Itinerario</a></li>
+					aria-current="page" href="/TurismoTierraMediaWeb/itinerario/list.do?id=${user.getId()}">Mi	Itinerario</a></li>
 				<c:if test="${user.isAdmin() }">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/TurismoTierraMediaWeb/usuario/list.adm">Usuarios</a></li>
