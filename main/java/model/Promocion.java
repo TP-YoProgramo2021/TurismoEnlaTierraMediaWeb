@@ -14,28 +14,32 @@ public abstract class Promocion implements Ofertables{
 	protected Atraccion atrGratis;
 	protected int precioPorTodo;
 	protected String nombre;
+	protected TipoDePromocion tipoPromo;
 	
-	public Promocion(String nombre, List<Atraccion> atracciones, double porcentajeDesc) {
+	public Promocion(String nombre, List<Atraccion> atracciones, double porcentajeDesc, TipoDePromocion tipoPromo) {
 		this.nombre=nombre;
 		this.atracciones = new LinkedList<Atraccion>();
 		this.atracciones = atracciones;
 		this.porcentajeDesc = porcentajeDesc/100;
+		this.tipoPromo=tipoPromo;
 		
 	}
 
-	public Promocion(String nombre, List<Atraccion> atracciones, Atraccion atrGratis) {
+	public Promocion(String nombre, List<Atraccion> atracciones, Atraccion atrGratis, TipoDePromocion tipoPromo) {
 		this.nombre=nombre;
 		this.atracciones = new LinkedList<Atraccion>();
 		this.atracciones = atracciones;
 		this.atrGratis = atrGratis;
+		this.tipoPromo=tipoPromo;
 		
 	}
 
-	public Promocion(String nombre, List<Atraccion> atracciones, int precioPorTodo) {
+	public Promocion(String nombre, List<Atraccion> atracciones, int precioPorTodo, TipoDePromocion tipoPromo) {
 		this.nombre=nombre;
 		this.atracciones = new LinkedList<Atraccion>();
 		this.atracciones = atracciones;
 		this.precioPorTodo = precioPorTodo;
+		this.tipoPromo=tipoPromo;
 		
 	}
 	@Override
@@ -49,7 +53,9 @@ public abstract class Promocion implements Ofertables{
 	public boolean esPromocion(){
 		return true;
 	}
-	
+	public TipoDePromocion getTipoPromo() {
+		return this.tipoPromo;
+	}
 	@Override
 	public boolean hayCupo() {
 		for (Atraccion atr: this.atracciones) {
@@ -124,6 +130,10 @@ public abstract class Promocion implements Ofertables{
 	@Override
 	public String getNombre() {
 		return this.nombre;
+	}
+	@Override
+	public boolean isNull() {
+		return true;
 	}
 	
 }

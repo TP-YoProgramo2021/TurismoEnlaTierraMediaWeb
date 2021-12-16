@@ -14,5 +14,5 @@ public String atrIncluidas();
 public boolean esOContiene(Ofertables oferta);
 public String getNombre();
 public int enStock();
-
+public boolean isNull();
 }

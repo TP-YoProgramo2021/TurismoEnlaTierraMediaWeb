@@ -43,6 +43,7 @@ public class UsuarioDAOImplement implements UsuarioDAO {
 			try {
 				rows = statement.executeUpdate();
 			} catch (Exception e) {
+				System.out.println(e.getMessage());
 				conn.rollback();
 			} finally {
 				conn.commit();

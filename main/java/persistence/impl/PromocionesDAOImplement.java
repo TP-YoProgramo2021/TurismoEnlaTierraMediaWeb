@@ -24,15 +24,17 @@ public class PromocionesDAOImplement implements PromocionesDAO {
 
 	public List<Promocion> findAll() {
 		try {
-// System.out.println("HOLA");
 
-			String sql = "SELECT p.nombre, group_concat(Nombre_atraccion) as Atracciones FROM Promociones p LEFT JOIN Promocion_Atraccion ap ON p.Nombre = ap.Nombre_promocion WHERE p.Habilitado = 1 GROUP BY p.Nombre;";
+
+			String sql1 = "SELECT p.nombre, group_concat(Nombre_atraccion) as Atracciones FROM Promociones p LEFT JOIN Promocion_Atraccion ap ON p.Nombre = ap.Nombre_promocion WHERE p.Habilitado = 1 GROUP BY p.Nombre;";
 			String sql2 = "SELECT * FROM Porcentual;";
 			String sql3 = "SELECT * FROM Absoluta;";
 			String sql4 = "SELECT * FROM AXB;";
+			
 
-			Connection conn = ConnectionProvider.getConnection();
-			conn.setAutoCommit(false);
+
+			Connection conn1 = ConnectionProvider.getConnection();
+			conn1.setAutoCommit(false);
 			Connection conn2 = ConnectionProvider.getConnection();
 			conn2.setAutoCommit(false);
 			Connection conn3 = ConnectionProvider.getConnection();
@@ -40,15 +42,13 @@ public class PromocionesDAOImplement implements PromocionesDAO {
 			Connection conn4 = ConnectionProvider.getConnection();
 			conn4.setAutoCommit(false);
 
-			PreparedStatement statement = conn.prepareStatement(sql);
-			ResultSet resultados = statement.executeQuery();
 
+			PreparedStatement statement1 = conn1.prepareStatement(sql1);
+			ResultSet resultados1 = statement1.executeQuery();
 			PreparedStatement statement2 = conn2.prepareStatement(sql2);
 			ResultSet resultados2 = statement2.executeQuery();
-
 			PreparedStatement statement3 = conn3.prepareStatement(sql3);
 			ResultSet resultados3 = statement3.executeQuery();
-
 			PreparedStatement statement4 = conn4.prepareStatement(sql4);
 			ResultSet resultados4 = statement4.executeQuery();
 
@@ -75,9 +75,10 @@ public class PromocionesDAOImplement implements PromocionesDAO {
 				dicAxb.put(key, value);
 
 			}
-			while (resultados.next()) {
+
+			while (resultados1.next()) {
 // System.out.println(resultados);
-				promos.add(toPromocion(resultados, dicPor, dicAbs, dicAxb));
+				promos.add(toPromocion(resultados1, dicPor, dicAbs, dicAxb));
 			}
 
 			return promos;
@@ -144,6 +145,12 @@ public class PromocionesDAOImplement implements PromocionesDAO {
 			//System.out.println("-----------------------------------------");
 
 		}
+	}
+
+	@Override
+	public int delete(int t) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -14,7 +14,7 @@ import model.Ofertables;
 import services.OfertasService;
 
 @WebServlet("/oferta/list.do")
-public class ListAttractionsServlet extends HttpServlet implements Servlet {
+public class ListOfertasServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 8745892064735091411L;
 	private OfertasService ofertasService;
 

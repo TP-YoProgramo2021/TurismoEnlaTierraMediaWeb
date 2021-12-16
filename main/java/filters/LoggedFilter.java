@@ -24,7 +24,7 @@ public class LoggedFilter implements Filter {
 		} else {
 			request.setAttribute("flash", "Por favor, debes ingresar primero");
 			
-			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/login.jsp");
+			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/TurismoTierraMediaWeb/login.jsp");
 			dispatcher.forward(request, response);
 		}
 

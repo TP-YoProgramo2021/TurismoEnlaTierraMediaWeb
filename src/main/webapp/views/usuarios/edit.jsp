@@ -13,7 +13,7 @@
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
 	
 	<main class="container">
-	<h2> Editar el Usuario </h2>
+	<h2 style="color: #f0eff4"> Editar usuario </h2>
 		
 			
 	<form action="edit.adm" method="post">

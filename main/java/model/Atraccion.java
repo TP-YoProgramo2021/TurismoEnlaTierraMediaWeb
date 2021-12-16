@@ -62,11 +62,10 @@ public class Atraccion implements Ofertables {
 		AtraccionesDAO atrDAO =DAOFactory.getAtraccionDAO();
 		if (this.cupos >= 1) {
 			this.cupos -= 1;
-			atrDAO.update(this);
+			System.out.println(atrDAO.update(this));
+			System.out.println("Ya se resto un cupo");
 		}
-		else {
-			throw new Exception("No quedaban cupos disponibles para esta atraccion");
-		}
+		
 	}
 	@Override
 	public List<Atraccion> atraccionesIncluidas() {
@@ -103,5 +102,9 @@ public class Atraccion implements Ofertables {
 		}
 		atrs=atrs.substring(0, atrs.length() - 2);
 		return atrs;
+	}
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public class PromocionAbsoluta extends Promocion{
 
 	public PromocionAbsoluta(String nombre, List<Atraccion> atracciones, int costoFinal) {
-		super(nombre, atracciones, costoFinal);
+		super(nombre, atracciones, costoFinal, TipoDePromocion.valueOf("Absoluta"));
 		//super((atraccion1.getCosto() + atraccion2.getCosto()) - descuentoAbsoluto, atraccion1.getTiempo() + atraccion2.getTiempo(), atraccion1.getTipo());
 
 	}

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +9,13 @@
 <script src="script.js" defer></script>
 <title>Crear Usuario</title>
 </head>
-<body style ="background-color: #26547C ;">
+<body style="background-color: #26547C;">
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
-
-	<form action="create.adm" method="post">
-		<jsp:include page="form.jsp"></jsp:include>
-	</form>
+	<main class="container">
+		<h2 style="color: #f0eff4">Datos nuevo usuario</h2>
+		<form action="create.adm" method="post">
+			<jsp:include page="form.jsp"></jsp:include>
+		</form>
+	</main>
 </body>
 </html>

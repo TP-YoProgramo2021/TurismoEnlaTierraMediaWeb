@@ -102,10 +102,8 @@ public class Usuario {
 		UsuarioDAO userDAO =DAOFactory.getUsuarioDAO();
 		if(this.presupuesto >= atraccion.getCosto()) {
 			this.presupuesto -= atraccion.getCosto();
-			userDAO.update(this);
-		}
-		else {
-			throw new Exception("No alcanza el dinero para comprar.");
+			System.out.println(userDAO.update(this));
+			System.out.println("Ya se cobro al usuario");
 		}
 	
 	}
@@ -113,10 +111,8 @@ public class Usuario {
 		UsuarioDAO userDAO =DAOFactory.getUsuarioDAO();
 		if(this.tiempoDisponible >= atraccion.getTiempo()) {
 			this.tiempoDisponible -= atraccion.getTiempo();
-			userDAO.update(this);
-		}
-		else {
-			throw new Exception("El usuario no cuenta con el tiempo necesario.");
+			System.out.println(userDAO.update(this));
+			System.out.println("Ya se resto el tiempo al usuario.");
 		}
 			
 	}
@@ -133,7 +129,9 @@ public class Usuario {
 						this.cobrar(oferta);
 						this.restarTiempo(oferta);
 						addToItinerary(atr2);
+						System.out.println("Compra con exito");
 					} catch (Exception e) {
+						System.out.println("Compra fallida");
 						e.printStackTrace();
 					}
 				}
@@ -143,7 +141,8 @@ public class Usuario {
 	private void addToItinerary(Atraccion atr2) {
 		ItinerarioDAOImplement itDAO = DAOFactory.getItinerarioDAO();
 		this.itinerario.add(atr2);
-		itDAO.insert(this,atr2);
+		System.out.println(itDAO.insert(this,atr2));
+		System.out.println("ya se agrego al itinerario");
 	}
 
 	public boolean isNull() {

@@ -8,7 +8,7 @@ import java.util.List;
 public class PromocionAxB extends Promocion implements Ofertables{
 
 	public PromocionAxB(String nombre, List<Atraccion> atracciones, Atraccion atraccionGratis) {
-		super(nombre, atracciones, atraccionGratis);
+		super(nombre, atracciones, atraccionGratis, TipoDePromocion.valueOf("AXB"));
 	
 	}
 
@@ -63,7 +63,6 @@ public class PromocionAxB extends Promocion implements Ofertables{
 
 	@Override
 	public boolean esPromocion() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <jsp:include page="/partials/head.jsp"></jsp:include>
 </head>
-<body>
+<body style ="background-color: #26547C ;">
 
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
 
@@ -28,11 +29,12 @@
 		</c:if>
 
 		<div class="bg-light p-4 mb-3 rounded">
-			<h1>Estas son nuestras sugerencias para usted</h1>
+			<h2>Estas son nuestras sugerencias para usted</h2>
 		</div>
 
+		<br />
 
-		<table class="table table-stripped table-hover">
+		<table class="table table-dark table-stripped table-hover table-bordered">
 			<thead>
 				<tr>
 					<th>Nombre</th>
@@ -46,10 +48,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${user.segerencia(ofertas)}" var="sugerencia">
+				<c:forEach items="${user.sugerencia(ofertas)}" var="sugerencia">
 					<tr>
-						<td><strong><c:out value="${sugerencia.getNombre()}"></c:out></strong></td>
-						<td><c:out value="${sugerencia.esPromocion? 'Promocion' : 'Atraccion'}"></c:out></td>
+						<td><c:out value="${sugerencia.getNombre()}"></c:out></td>
+						<td><c:out value="${sugerencia.esPromocion()? 'Promocion' : 'Atraccion'}"></c:out></td>
 						<td><c:out value="${sugerencia.getCosto()}"></c:out></td>
 						<td><c:out value="${sugerencia.getTiempo()}"></c:out></td>
 						<td><c:out value="${sugerencia.enStock()}"></c:out></td>
@@ -59,7 +61,7 @@
 						<td> <c:choose>
 								<c:when
 									test="${user.puedeComprar(sugerencia)}">
-									<a href="/TurismoTierraMediaWeb/oferta/buy.do?oferta_comprar=${sugerencia}"
+									<a href="/TurismoTierraMediaWeb/oferta/buy.do?ofertaComprar=${sugerencia.getNombre()}"
 										class="btn btn-success rounded" role="button">Comprar</a>
 								</c:when>
 								<c:otherwise>
