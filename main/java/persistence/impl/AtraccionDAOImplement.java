@@ -97,6 +97,20 @@ public class AtraccionDAOImplement implements AtraccionesDAO {
 
 	}
 
+	public int borradoLogico(String nombre) {
+		try {
+			String sql = "UPDATE Atracciones SET Habilitado = 0 WHERE Nombre = ?";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, nombre);
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MiDataException(e);
+		}
+	}
 	@Override
 	public int delete(int t) {
 		// TODO Auto-generated method stub

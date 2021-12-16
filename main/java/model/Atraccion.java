@@ -2,8 +2,10 @@ package model;
 
 
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import persistence.dao.AtraccionesDAO;
@@ -16,6 +18,7 @@ public class Atraccion implements Ofertables {
 	private int cupos;
 	private TipoDeAtraccion tipoDeAtraccion;
 
+	private Map<String, String> errors;
 	
 	public Atraccion(String nombre, int costo, double tiempo, int cupos, TipoDeAtraccion tipoDeAtraccion) {
 		this.nombre=nombre;
@@ -107,4 +110,26 @@ public class Atraccion implements Ofertables {
 	public boolean isNull() {
 		return false;
 	}
+	
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+	
+	public void validate() {
+		errors = new HashMap<String, String>();
+
+		if (this.getCosto() <= 0) {
+			errors.put("cost", "Debe ser positivo");
+		}
+		if (this.getTiempo() <= 0) {
+			errors.put("duration", "Debe ser positivo");
+		}
+		if (this.enStock() <= 0) {
+			errors.put("capacity", "Debe ser positivo");
+		}
+	}
+	
+	
+	
 }

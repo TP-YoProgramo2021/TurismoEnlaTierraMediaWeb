@@ -19,7 +19,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/TurismoTierraMediaWeb/usuario/list.adm">Usuarios</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="/TurismoTierraMediaWeb/usuarios/index.adm">Atracciones</a></li>
+						aria-current="page" href="/TurismoTierraMediaWeb/atraccion/index.adm">Atracciones</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/TurismoTierraMediaWeb/usuarios/index.adm">Tipo de Atracciones</a></li>
 					<li class="nav-item"><a class="nav-link active"
